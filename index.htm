@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DigitalTech - Servicios Profesionales</title>
+    <title>TECNOMENTE - Soluciones Informáticas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -149,11 +149,20 @@
 
         .hero h1 {
             font-size: 4.5rem;
-            font-weight: 300;
+            font-weight: 700;
             letter-spacing: 5px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 2.5rem;
+            color: var(--text-light);
+            text-transform: uppercase;
         }
 
         .hero p {
@@ -197,7 +206,7 @@
             font-weight: 600;
         }
 
-        /* Products Section */
+        /* Services Section */
         .services {
             padding: 6rem 2rem;
             max-width: 1400px;
@@ -314,6 +323,100 @@
             margin-bottom: 2rem;
         }
 
+        /* Contact Section */
+        .contact {
+            padding: 6rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 3rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--secondary);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 3rem;
+            width: 90%;
+            max-width: 500px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--accent);
+        }
+
         /* Footer */
         .footer {
             background-color: rgba(0, 0, 0, 0.9);
@@ -392,6 +495,10 @@
                 font-size: 2.5rem;
             }
 
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
             .hero p {
                 font-size: 1rem;
             }
@@ -399,30 +506,32 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
+
+            .contact-form, .modal-content {
+                padding: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Announcement Bar -->
     <div class="announcement">
-        NUEVOS SERVICIOS DE AUTOMATIZACIÓN - TRABAJA MÁS RÁPIDO Y MEJOR
+        SOLUCIONES INFORMÁTICAS PROFESIONALES - SOPORTE TÉCNICO ESPECIALIZADO
     </div>
 
     <!-- Header -->
     <header class="header">
         <nav class="nav">
-            <div class="logo">DIGITALTECH</div>
+            <div class="logo">TECNOMENTE</div>
             <ul class="nav-links">
                 <li><a href="#services">Servicios</a></li>
                 <li><a href="#about">Nosotros</a></li>
-                <li><a href="#portfolio">Portafolio</a></li>
-                <li><a href="#pricing">Precios</a></li>
                 <li><a href="#contact">Contacto</a></li>
+                <li><a href="#support">Soporte</a></li>
             </ul>
             <div class="nav-actions">
-                <i class="fas fa-search"></i>
-                <i class="fas fa-user"></i>
-                <i class="fas fa-shopping-cart"></i>
+                <i class="fas fa-phone" onclick="openQuoteModal()"></i>
+                <i class="fas fa-envelope" onclick="scrollToContact()"></i>
             </div>
             <button class="mobile-menu-btn">
                 <i class="fas fa-bars"></i>
@@ -432,9 +541,13 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>DigitalTech</h1>
-        <p>Soluciones profesionales en documentos, hojas de cálculo y edición de imágenes</p>
-        <a href="#services" class="btn">Ver Servicios</a>
+        <h1>TECNOMENTE</h1>
+        <h2>SOLUCIONES INFORMÁTICAS</h2>
+        <p>Expertos en tecnología listos para resolver todos tus problemas informáticos</p>
+        <div>
+            <a href="#services" class="btn">Nuestros Servicios</a>
+            <button class="btn" onclick="openQuoteModal()" style="background: transparent; color: var(--secondary); border: 2px solid var(--accent); margin-left: 1rem;">Solicitar Presupuesto</button>
+        </div>
     </section>
 
     <!-- Services Section -->
@@ -455,7 +568,7 @@
                     <li>Automatización con macros</li>
                 </ul>
                 <div class="service-price">Desde $25/h</div>
-                <a href="#contact" class="btn">Contratar</a>
+                <button class="btn" onclick="openQuoteModal()">Solicitar Presupuesto</button>
             </div>
             <div class="service-card">
                 <div class="service-icon">
@@ -471,7 +584,7 @@
                     <li>Análisis de datos</li>
                 </ul>
                 <div class="service-price">Desde $30/h</div>
-                <a href="#contact" class="btn">Contratar</a>
+                <button class="btn" onclick="openQuoteModal()">Solicitar Presupuesto</button>
             </div>
             <div class="service-card">
                 <div class="service-icon">
@@ -487,7 +600,7 @@
                     <li>Restauración de imágenes antiguas</li>
                 </ul>
                 <div class="service-price">Desde $35/h</div>
-                <a href="#contact" class="btn">Contratar</a>
+                <button class="btn" onclick="openQuoteModal()">Solicitar Presupuesto</button>
             </div>
         </div>
     </section>
@@ -495,15 +608,39 @@
     <!-- About Section -->
     <section class="about" id="about">
         <div class="about-content">
-            <h2>Transformamos tus ideas en realidad digital</h2>
-            <p>En DigitalTech combinamos expertise técnico con creatividad para ofrecer soluciones profesionales en procesamiento de documentos, hojas de cálculo y edición de imágenes. Nuestro equipo está especializado en las herramientas más avanzadas del mercado.</p>
-            <p>Ya sea que necesites un documento corporativo impecable, un análisis de datos complejo o imágenes que impacten, tenemos la solución perfecta para tus necesidades.</p>
-            <a href="#contact" class="btn">Solicitar Presupuesto</a>
+            <h2>Tu Socio Tecnológico de Confianza</h2>
+            <p>En TECNOMENTE combinamos expertise técnico con un servicio al cliente excepcional para ofrecer soluciones informáticas completas. Nuestro equipo está especializado en las herramientas más avanzadas del mercado.</p>
+            <p>Ya sea que necesites ayuda con documentos de oficina, análisis de datos complejos o edición de imágenes profesionales, tenemos la solución perfecta para tus necesidades tecnológicas.</p>
+            <button class="btn" onclick="openQuoteModal()">Solicitar Presupuesto</button>
         </div>
     </section>
 
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contacto</h2>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Nombre *</label>
+                <input type="text" id="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="lastname">Apellido *</label>
+                <input type="text" id="lastname" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico *</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje *</label>
+                <textarea id="message" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn" style="width: 100%;">Enviar Mensaje</button>
+        </form>
+    </section>
+
     <!-- Footer -->
-    <footer class="footer" id="contact">
+    <footer class="footer">
         <div class="footer-content">
             <div class="footer-column">
                 <h3>Servicios</h3>
@@ -511,16 +648,16 @@
                     <li><a href="#services">Procesamiento de Texto</a></li>
                     <li><a href="#services">Hojas de Cálculo</a></li>
                     <li><a href="#services">Edición de Imágenes</a></li>
-                    <li><a href="#services">Automatización</a></li>
+                    <li><a href="#services">Soporte Técnico</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Compañía</h3>
                 <ul class="footer-links">
                     <li><a href="#about">Nosotros</a></li>
-                    <li><a href="#portfolio">Portafolio</a></li>
                     <li><a href="#testimonials">Testimonios</a></li>
                     <li><a href="#blog">Blog</a></li>
+                    <li><a href="#careers">Trabaja con Nosotros</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -529,23 +666,56 @@
                     <li><a href="#contact">Contacto</a></li>
                     <li><a href="#faq">Preguntas Frecuentes</a></li>
                     <li><a href="#terms">Términos de Servicio</a></li>
-                    <li><a href="#privacy">Privacidad</a></li>
+                    <li><a href="#privacy">Política de Privacidad</a></li>
                 </ul>
             </div>
             <div class="footer-column">
                 <h3>Conecta</h3>
                 <ul class="footer-links">
-                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
                     <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-                    <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 DigitalTech. Todos los derechos reservados.</p>
+            <p>&copy; 2024 TECNOMENTE - Soluciones Informáticas. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- Quote Modal -->
+    <div class="modal" id="quoteModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeQuoteModal()">&times;</button>
+            <h2 style="margin-bottom: 2rem; text-align: center;">Solicitar Presupuesto</h2>
+            <form id="quoteForm">
+                <div class="form-group">
+                    <label for="quoteName">Nombre *</label>
+                    <input type="text" id="quoteName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="quoteService">Servicio de Interés *</label>
+                    <select id="quoteService" class="form-control" required>
+                        <option value="">Selecciona un servicio</option>
+                        <option value="word">Procesamiento de Texto</option>
+                        <option value="excel">Hojas de Cálculo</option>
+                        <option value="images">Edición de Imágenes</option>
+                        <option value="other">Otro servicio</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quoteContact">Correo o Teléfono *</label>
+                    <input type="text" id="quoteContact" class="form-control" required placeholder="ejemplo@correo.com o +34 123 456 789">
+                </div>
+                <div class="form-group">
+                    <label for="quoteDescription">Descripción de tu consulta *</label>
+                    <textarea id="quoteDescription" class="form-control" required placeholder="Describe brevemente lo que necesitas..."></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Enviar Solicitud</button>
+            </form>
+        </div>
+    </div>
 
     <script>
         // Header scroll effect
@@ -615,6 +785,43 @@
                     }
                 }
             });
+        });
+
+        // Scroll to contact function
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Quote Modal functions
+        function openQuoteModal() {
+            document.getElementById('quoteModal').classList.add('active');
+        }
+
+        function closeQuoteModal() {
+            document.getElementById('quoteModal').classList.remove('active');
+        }
+
+        // Form submissions
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+            this.reset();
+        });
+
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('¡Solicitud enviada! Nos pondremos en contacto contigo en breve.');
+            this.reset();
+            closeQuoteModal();
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('quoteModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeQuoteModal();
+            }
         });
     </script>
 </body>
