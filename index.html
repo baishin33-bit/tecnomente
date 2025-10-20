@@ -3,8 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Sitio Web Profesional</title>
+    <title>TechStyle - Soluciones Digitales</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --success: #4cd964;
+            --warning: #ff9500;
+            --dark: #2d3748;
+            --light: #f7fafc;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,223 +23,545 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
             line-height: 1.6;
-            color: #333;
+            overflow-x: hidden;
         }
 
+        /* Header y Navegación */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
         .nav {
-            background: #333;
-            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        .nav ul {
-            list-style: none;
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
             display: flex;
-            justify-content: center;
+            list-style: none;
             gap: 2rem;
         }
 
-        .nav a {
-            color: white;
+        .nav-links a {
             text-decoration: none;
-            font-weight: bold;
+            color: var(--dark);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .nav a:hover {
-            color: #667eea;
+        .nav-links a:hover {
+            color: var(--primary);
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary);
+            transition: width 0.3s ease;
         }
 
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section con efecto 3D */
         .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 4rem 0;
-            background: #f4f4f4;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 4rem;
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            transform: translateZ(50px);
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 2rem;
-            color: #666;
+            opacity: 0.9;
         }
 
+        /* Botones modernos */
         .btn {
             display: inline-block;
-            background: #667eea;
-            color: white;
             padding: 1rem 2rem;
+            border-radius: 50px;
             text-decoration: none;
-            border-radius: 5px;
             font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
         }
 
         .btn:hover {
-            background: #764ba2;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
 
-        .features {
+        /* Secciones */
+        .section {
+            padding: 6rem 5%;
+            background: white;
+            margin: 2rem auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-width: 1400px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Catálogo de Productos */
+        .catalog {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            margin: 4rem 0;
+            margin-top: 3rem;
         }
 
-        .feature-card {
-            background: white;
+        .product-card {
+            background: var(--light);
+            border-radius: 20px;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .feature-card i {
-            font-size: 3rem;
-            color: #667eea;
-            margin-bottom: 1rem;
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
         }
 
+        .product-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+
+        .product-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        /* Opciones de Pago */
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .payment-method {
+            background: var(--light);
+            padding: 1rem 2rem;
+            border-radius: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Formulario de Contacto */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Políticas de Privacidad */
+        .privacy-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .privacy-section {
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
         .footer {
-            background: #333;
+            background: var(--dark);
             color: white;
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 5%;
             margin-top: 4rem;
         }
 
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+            transform: scale(1.2);
+        }
+
+        /* Efectos 3D y Animaciones */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .perspective {
+            perspective: 1000px;
+        }
+
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav ul {
-                flex-direction: column;
-                gap: 1rem;
+            .nav-links {
+                display: none;
             }
-            
+
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+
+            .section {
+                padding: 4rem 1rem;
+            }
+
+            .catalog {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
-        <div class="container">
-            <h1>Mi Sitio Web Profesional</h1>
-            <p>Bienvenido a mi página web moderna y responsive</p>
-        </div>
+        <nav class="nav">
+            <div class="logo">TechStyle</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#catalogo">Catálogo</a></li>
+                <li><a href="#pagos">Pagos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#privacidad">Privacidad</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <nav class="nav">
-        <div class="container">
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#acerca">Acerca de</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
-
+    <!-- Hero Section -->
     <section class="hero" id="inicio">
-        <div class="container">
-            <h1>Transforma tu Presencia Digital</h1>
-            <p>Soluciones web innovadoras para hacer crecer tu negocio</p>
-            <a href="#contacto" class="btn">Comenzar Ahora</a>
-        </div>
-    </section>
-
-    <section class="container" id="servicios">
-        <h2 style="text-align: center; margin-bottom: 3rem;">Nuestros Servicios</h2>
-        <div class="features">
-            <div class="feature-card">
-                <h3>🎨 Diseño Web</h3>
-                <p>Diseños modernos y atractivos que capturan la esencia de tu marca.</p>
-            </div>
-            <div class="feature-card">
-                <h3>⚡ Desarrollo Rápido</h3>
-                <p>Sitios web optimizados y de alto rendimiento.</p>
-            </div>
-            <div class="feature-card">
-                <h3>📱 Responsive</h3>
-                <p>Perfecto en todos los dispositivos: móvil, tablet y desktop.</p>
+        <div class="hero-content">
+            <h1 class="floating">Transforma tu Mundo Digital</h1>
+            <p>Soluciones innovadoras con diseño 3D y tecnología de vanguardia</p>
+            <div>
+                <a href="#catalogo" class="btn btn-primary">Explorar Catálogo</a>
+                <a href="#contacto" class="btn btn-secondary">Contactar Ahora</a>
             </div>
         </div>
     </section>
 
-    <section style="background: #f4f4f4; padding: 4rem 0;" id="acerca">
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 2rem;">Acerca de Nosotros</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto;">
-                Somos un equipo apasionado de desarrolladores web dedicados a crear 
-                experiencias digitales excepcionales. Combinamos creatividad y tecnología 
-                para llevar tu visión a la realidad.
-            </p>
+    <!-- Catálogo -->
+    <section class="section" id="catalogo">
+        <h2 class="section-title">Nuestro Catálogo</h2>
+        <div class="catalog">
+            <div class="product-card card-3d">
+                <i class="fas fa-laptop-code" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                <h3>Desarrollo Web Premium</h3>
+                <p>Sitios web con efectos 3D y animaciones avanzadas</p>
+                <div class="product-price">$999</div>
+                <button class="btn btn-primary">Comprar Ahora</button>
+            </div>
+
+            <div class="product-card card-3d">
+                <i class="fas fa-mobile-alt" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                <h3>App Móvil Pro</h3>
+                <p>Aplicaciones nativas con realidad aumentada</p>
+                <div class="product-price">$1,499</div>
+                <button class="btn btn-primary">Comprar Ahora</button>
+            </div>
+
+            <div class="product-card card-3d">
+                <i class="fas fa-shopping-cart" style="font-size: 3rem; color: var(--success); margin-bottom: 1rem;"></i>
+                <h3>E-commerce 3D</h3>
+                <p>Tienda online con visualización 3D de productos</p>
+                <div class="product-price">$1,999</div>
+                <button class="btn btn-primary">Comprar Ahora</button>
+            </div>
         </div>
     </section>
 
-    <section class="container" id="contacto">
-        <h2 style="text-align: center; margin-bottom: 2rem;">Contacto</h2>
-        <form style="max-width: 600px; margin: 0 auto;">
-            <input type="text" placeholder="Nombre" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
-            <input type="email" placeholder="Email" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;">
-            <textarea placeholder="Mensaje" rows="5" style="width: 100%; padding: 1rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 5px;"></textarea>
-            <button type="submit" class="btn" style="border: none; cursor: pointer;">Enviar Mensaje</button>
+    <!-- Opciones de Pago -->
+    <section class="section" id="pagos">
+        <h2 class="section-title">Opciones de Pago</h2>
+        <div class="payment-options">
+            <div class="payment-method">
+                <i class="fab fa-cc-paypal" style="font-size: 2rem; color: #0070ba;"></i>
+                <p>PayPal</p>
+            </div>
+            <div class="payment-method">
+                <i class="fab fa-cc-stripe" style="font-size: 2rem; color: #6772e5;"></i>
+                <p>Stripe</p>
+            </div>
+            <div class="payment-method">
+                <i class="fab fa-cc-visa" style="font-size: 2rem; color: #1434cb;"></i>
+                <p>Visa/Mastercard</p>
+            </div>
+            <div class="payment-method">
+                <i class="fas fa-university" style="font-size: 2rem; color: var(--primary);"></i>
+                <p>Transferencia</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="section" id="contacto">
+        <h2 class="section-title">Contacto</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Nombre Completo</label>
+                <input type="text" id="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="service">Servicio de Interés</label>
+                <select id="service" class="form-control">
+                    <option>Desarrollo Web</option>
+                    <option>App Móvil</option>
+                    <option>E-commerce</option>
+                    <option>Consultoría</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Mensaje</label>
+                <textarea id="message" rows="5" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensaje</button>
         </form>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Mi Sitio Web Profesional. Todos los derechos reservados.</p>
+    <!-- Políticas de Privacidad -->
+    <section class="section" id="privacidad">
+        <h2 class="section-title">Políticas de Privacidad</h2>
+        <div class="privacy-content">
+            <div class="privacy-section">
+                <h3>Recopilación de Información</h3>
+                <p>Recopilamos información que nos proporcionas directamente, incluyendo nombre, email y información de contacto cuando realizas una compra o nos contactas.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h3>Uso de la Información</h3>
+                <p>Utilizamos tu información para procesar transacciones, enviar actualizaciones y mejorar nuestros servicios. Nunca compartimos tu información con terceros sin tu consentimiento.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h3>Seguridad de Pagos</h3>
+                <p>Todas las transacciones se procesan a través de gateways de pago seguros y encriptados. No almacenamos información de tarjetas de crédito en nuestros servidores.</p>
+            </div>
+            
+            <div class="privacy-section">
+                <h3>Cookies</h3>
+                <p>Utilizamos cookies para mejorar la experiencia de usuario y analizar el tráfico del sitio. Puedes desactivar las cookies en la configuración de tu navegador.</p>
+            </div>
         </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="logo" style="-webkit-text-fill-color: white; margin-bottom: 1rem;">TechStyle</div>
+        <p>Soluciones digitales innovadoras para tu negocio</p>
+        
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+        
+        <p>&copy; 2024 TechStyle. Todos los derechos reservados.</p>
     </footer>
 
     <script>
-        // Smooth scroll para los enlaces
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // Efectos 3D y Interactividad
+        document.addEventListener('DOMContentLoaded', function() {
+            // Efecto 3D en tarjetas
+            const cards = document.querySelectorAll('.card-3d');
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                    const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                    card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                });
+
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'none';
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.transform = 'rotateY(0deg) rotateX(0deg)';
                 });
             });
-        });
 
-        // Animación simple al hacer scroll
-        window.addEventListener('scroll', function() {
-            const features = document.querySelectorAll('.feature-card');
-            features.forEach(feature => {
-                const position = feature.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if(position < screenPosition) {
-                    feature.style.opacity = '1';
-                    feature.style.transform = 'translateY(0)';
-                }
+            // Smooth scroll para navegación
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Animación al hacer scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observar elementos para animación
+            document.querySelectorAll('.product-card, .payment-method, .form-group').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
             });
         });
 
-        // Inicializar animaciones
-        document.addEventListener('DOMContentLoaded', function() {
-            const features = document.querySelectorAll('.feature-card');
-            features.forEach(feature => {
-                feature.style.opacity = '0';
-                feature.style.transform = 'translateY(20px)';
-                feature.style.transition = 'all 0.6s ease';
-            });
+        // Simulación de proceso de pago
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            if (button.textContent === 'Comprar Ahora') {
+                button.addEventListener('click', function() {
+                    const product = this.closest('.product-card').querySelector('h3').textContent;
+                    const price = this.closest('.product-card').querySelector('.product-price').textContent;
+                    
+                    if (confirm(`¿Deseas comprar ${product} por ${price}?`)) {
+                        alert('¡Gracias por tu compra! Te redirigiremos al proceso de pago.');
+                        // Aquí iría la integración con el gateway de pago
+                    }
+                });
+            }
         });
     </script>
 </body>
