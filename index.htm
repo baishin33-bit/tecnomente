@@ -27,172 +27,275 @@
             color: var(--secondary);
             line-height: 1.6;
             overflow-x: hidden;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            position: relative;
         }
 
-        /* Header */
+        /* Fondo Animado Tecnológico */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #000428, #004e92, #000428);
+            overflow: hidden;
+        }
+
+        .circuit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 140, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 240, 255, 0.05) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .node {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .node:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .node:nth-child(2) { top: 80%; left: 15%; animation-delay: 1s; }
+        .node:nth-child(3) { top: 40%; left: 85%; animation-delay: 2s; }
+        .node:nth-child(4) { top: 60%; left: 90%; animation-delay: 3s; }
+        .node:nth-child(5) { top: 30%; left: 50%; animation-delay: 4s; }
+        .node:nth-child(6) { top: 70%; left: 60%; animation-delay: 5s; }
+
+        .connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: connectionGlow 4s linear infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-20px) scale(1.2); }
+        }
+
+        @keyframes connectionGlow {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Overlay para mejor legibilidad */
+        .content-overlay {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.7);
+            min-height: 100vh;
+        }
+
+        /* Header Mobile */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 1.5rem 0;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-        }
-
-        .header.scrolled {
+            background: rgba(0, 0, 0, 0.95);
             padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0, 240, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
         }
 
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 1rem;
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            letter-spacing: 2px;
             background: linear-gradient(to right, var(--accent), var(--accent-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2.5rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
             color: var(--secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            padding: 0.5rem;
             transition: var(--transition);
-            padding: 0.5rem 0;
-            position: relative;
         }
 
-        .nav-links a:hover {
+        .mobile-menu-btn:hover {
             color: var(--accent);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: linear-gradient(to right, var(--accent), var(--accent-dark));
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(15px);
             transition: var(--transition);
+            z-index: 2000;
+            padding: 2rem;
+            border-right: 2px solid var(--accent);
+            box-shadow: 5px 0 25px rgba(0, 240, 255, 0.2);
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        .mobile-menu.active {
+            left: 0;
         }
 
-        .nav-actions {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-actions i {
-            font-size: 1.2rem;
+        .close-menu {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--secondary);
+            font-size: 1.5rem;
             cursor: pointer;
             transition: var(--transition);
-            color: var(--secondary);
         }
 
-        .nav-actions i:hover {
+        .close-menu:hover {
             color: var(--accent);
             transform: scale(1.1);
         }
 
-        /* Hero Section */
+        .mobile-nav-links {
+            list-style: none;
+            margin-top: 3rem;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-nav-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: block;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .mobile-nav-links a:hover {
+            color: var(--accent);
+            padding-left: 1rem;
+        }
+
+        .mobile-nav-links a::before {
+            content: '▸';
+            position: absolute;
+            left: -1rem;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .mobile-nav-links a:hover::before {
+            opacity: 1;
+            left: 0;
+        }
+
+        .mobile-actions {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-actions .btn {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Hero Section Mobile */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 2rem;
+            padding: 1rem;
             position: relative;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, rgba(0, 240, 255, 0.1) 0%, transparent 70%);
-            z-index: -1;
-        }
-
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            letter-spacing: 5px;
+            letter-spacing: 3px;
             margin-bottom: 0.5rem;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
         }
 
         .hero h2 {
-            font-size: 1.8rem;
+            font-size: 1.2rem;
             font-weight: 300;
-            letter-spacing: 3px;
-            margin-bottom: 2.5rem;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
             color: var(--text-light);
             text-transform: uppercase;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
+            font-size: 1rem;
             margin-bottom: 2.5rem;
             color: var(--text-light);
             font-weight: 300;
+            line-height: 1.6;
         }
 
         .btn {
             display: inline-block;
-            padding: 1rem 2.5rem;
+            padding: 1rem 2rem;
             background: linear-gradient(to right, var(--accent), var(--accent-dark));
             color: var(--primary);
             text-decoration: none;
             font-size: 0.9rem;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             transition: var(--transition);
             border: none;
-            border-radius: 30px;
+            border-radius: 25px;
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
         }
 
         .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--accent);
         }
 
         /* Announcement Bar */
@@ -201,40 +304,37 @@
             color: var(--primary);
             text-align: center;
             padding: 0.8rem;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
             font-weight: 600;
+            position: relative;
+            top: 60px;
         }
 
-        /* Services Section */
+        /* Services Section Mobile */
         .services {
-            padding: 6rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            padding: 4rem 1rem;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 300;
-            letter-spacing: 3px;
-            margin-bottom: 4rem;
+            letter-spacing: 2px;
+            margin-bottom: 3rem;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
         }
 
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
         .service-card {
-            position: relative;
-            overflow: hidden;
             background: var(--card-bg);
             border-radius: 15px;
-            padding: 2.5rem;
+            padding: 2rem;
             transition: var(--transition);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -242,26 +342,26 @@
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 240, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.2);
             border-color: var(--accent);
         }
 
         .service-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
             color: var(--accent);
             text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
         }
 
         .service-name {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             margin-bottom: 1rem;
             font-weight: 500;
         }
 
         .service-description {
-            font-size: 1rem;
+            font-size: 0.9rem;
             line-height: 1.6;
             color: var(--text-light);
             margin-bottom: 1.5rem;
@@ -270,14 +370,15 @@
         .service-features {
             list-style: none;
             text-align: left;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .service-features li {
-            padding: 0.5rem 0;
+            padding: 0.4rem 0;
             color: var(--text-light);
             position: relative;
-            padding-left: 1.5rem;
+            padding-left: 1.2rem;
+            font-size: 0.9rem;
         }
 
         .service-features li:before {
@@ -288,58 +389,55 @@
         }
 
         .service-price {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
             color: var(--accent);
         }
 
-        /* About Section */
+        /* About Section Mobile */
         .about {
-            padding: 6rem 2rem;
+            padding: 4rem 1rem;
             background: rgba(0, 0, 0, 0.5);
             text-align: center;
             backdrop-filter: blur(5px);
         }
 
         .about-content {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 100%;
         }
 
         .about h2 {
-            font-size: 2.5rem;
+            font-size: 1.8rem;
             font-weight: 300;
-            margin-bottom: 2rem;
-            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
         }
 
         .about p {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 1rem;
+            line-height: 1.6;
             color: var(--text-light);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
-        /* Contact Section */
+        /* Contact Section Mobile */
         .contact {
-            padding: 6rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
+            padding: 4rem 1rem;
         }
 
         .contact-form {
             background: var(--card-bg);
             border-radius: 15px;
-            padding: 3rem;
+            padding: 2rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .form-group label {
@@ -347,6 +445,7 @@
             margin-bottom: 0.5rem;
             color: var(--text-light);
             font-weight: 500;
+            font-size: 0.9rem;
         }
 
         .form-control {
@@ -367,11 +466,32 @@
         }
 
         textarea.form-control {
-            min-height: 150px;
+            min-height: 120px;
             resize: vertical;
         }
 
-        /* Modal */
+        .file-upload {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .file-upload:hover {
+            border-color: var(--accent);
+            background: rgba(0, 240, 255, 0.1);
+        }
+
+        .file-upload i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        /* Modal Mobile */
         .modal {
             display: none;
             position: fixed;
@@ -379,32 +499,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.95);
             z-index: 3000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
+            padding: 1rem;
+            overflow-y: auto;
         }
 
         .modal.active {
-            display: flex;
+            display: block;
         }
 
         .modal-content {
             background: var(--card-bg);
             border-radius: 15px;
-            padding: 3rem;
-            width: 90%;
-            max-width: 500px;
+            padding: 2rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
+            margin-top: 2rem;
         }
 
         .close-modal {
             position: absolute;
             top: 1rem;
-            right: 1.5rem;
+            right: 1rem;
             background: none;
             border: none;
             color: var(--text-light);
@@ -417,27 +535,56 @@
             color: var(--accent);
         }
 
-        /* Footer */
+        /* Quick Actions */
+        .quick-actions {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(to right, var(--accent), var(--accent-dark));
+            color: var(--primary);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+            transition: var(--transition);
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer Mobile */
         .footer {
             background-color: rgba(0, 0, 0, 0.9);
             color: var(--secondary);
-            padding: 4rem 2rem 2rem;
+            padding: 3rem 1rem 2rem;
             backdrop-filter: blur(10px);
         }
 
         .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
         }
 
         .footer-column h3 {
             font-size: 1.1rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             font-weight: 500;
             color: var(--accent);
         }
@@ -447,7 +594,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .footer-links a {
@@ -462,367 +609,465 @@
         }
 
         .footer-bottom {
-            max-width: 1400px;
-            margin: 3rem auto 0;
+            margin-top: 2rem;
             padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-light);
         }
 
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--secondary);
+        /* Secciones adicionales */
+        .products, .pricing {
+            padding: 4rem 1rem;
+            min-height: 50vh;
+        }
+
+        .price-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .price-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin: 1rem 0;
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links, .nav-actions {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
+        @media (max-width: 480px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
             }
-
+            
             .hero h2 {
-                font-size: 1.2rem;
-            }
-
-            .hero p {
                 font-size: 1rem;
             }
-
-            .services-grid {
-                grid-template-columns: 1fr;
+            
+            .btn {
+                padding: 0.9rem 1.5rem;
+                font-size: 0.8rem;
             }
-
-            .contact-form, .modal-content {
-                padding: 2rem;
+            
+            .service-card {
+                padding: 1.5rem;
             }
+            
+            .modal-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Prevenir scroll horizontal */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
         }
     </style>
 </head>
 <body>
-    <!-- Announcement Bar -->
-    <div class="announcement">
-        SOLUCIONES INFORMÁTICAS PROFESIONALES - SOPORTE TÉCNICO ESPECIALIZADO
+    <!-- Fondo Animado -->
+    <div class="animated-bg">
+        <div class="circuit"></div>
+        <div class="node"></div>
+        <div class="node"></div>
+        <div class="node"></div>
+        <div class="node"></div>
+        <div class="node"></div>
+        <div class="node"></div>
     </div>
 
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">TECNOMENTE</div>
-            <ul class="nav-links">
-                <li><a href="#services">Servicios</a></li>
-                <li><a href="#about">Nosotros</a></li>
-                <li><a href="#contact">Contacto</a></li>
-                <li><a href="#support">Soporte</a></li>
-            </ul>
-            <div class="nav-actions">
-                <i class="fas fa-phone" onclick="openQuoteModal()"></i>
-                <i class="fas fa-envelope" onclick="scrollToContact()"></i>
-            </div>
-            <button class="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
+    <div class="content-overlay">
+        <!-- Announcement Bar -->
+        <div class="announcement">
+            SOLUCIONES INFORMÁTICAS PROFESIONALES
+        </div>
+
+        <!-- Header Mobile -->
+        <header class="header">
+            <nav class="nav">
+                <div class="logo">TECNOMENTE</div>
+                <button class="mobile-menu-btn" onclick="openMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </header>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <button class="close-menu" onclick="closeMobileMenu()">
+                <i class="fas fa-times"></i>
             </button>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>TECNOMENTE</h1>
-        <h2>SOLUCIONES INFORMÁTICAS</h2>
-        <p>Expertos en tecnología listos para resolver todos tus problemas informáticos</p>
-        <div>
-            <a href="#services" class="btn">Nuestros Servicios</a>
-            <button class="btn" onclick="openQuoteModal()" style="background: transparent; color: var(--secondary); border: 2px solid var(--accent); margin-left: 1rem;">Solicitar Presupuesto</button>
+            <ul class="mobile-nav-links">
+                <li><a href="#services" onclick="closeMobileMenu()">Productos</a></li>
+                <li><a href="#pricing" onclick="closeMobileMenu()">Precios</a></li>
+                <li><a href="#about" onclick="closeMobileMenu()">Nosotros</a></li>
+                <li><a href="#contact" onclick="closeMobileMenu()">Contáctenos</a></li>
+            </ul>
+            <div class="mobile-actions">
+                <button class="btn" onclick="openQuoteModal(); closeMobileMenu();">Solicitar Presupuesto</button>
+                <button class="btn btn-outline" onclick="scrollToContact(); closeMobileMenu();">Contactar Ahora</button>
+            </div>
         </div>
-    </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
-        <h2 class="section-title">Nuestros Servicios</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-file-word"></i>
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>TECNOMENTE</h1>
+            <h2>SOLUCIONES INFORMÁTICAS</h2>
+            <p>Expertos en tecnología listos para resolver todos tus problemas informáticos de forma rápida y profesional</p>
+            <div style="display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 300px;">
+                <a href="#services" class="btn">Ver Servicios</a>
+                <button class="btn btn-outline" onclick="openQuoteModal()">Solicitar Presupuesto</button>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products" id="services">
+            <h2 class="section-title">Nuestros Productos</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-word"></i>
+                    </div>
+                    <h3 class="service-name">Procesamiento de Texto</h3>
+                    <p class="service-description">Creación, edición y formateo profesional de documentos en Word.</p>
+                    <ul class="service-features">
+                        <li>Formateo avanzado</li>
+                        <li>Creación de plantillas</li>
+                        <li>Conversión de formatos</li>
+                        <li>Revisión ortográfica</li>
+                    </ul>
+                    <div class="service-price">Desde $25/h</div>
+                    <button class="btn" onclick="selectService('Procesamiento de Texto', 25)" style="width: 100%;">Contratar Este Servicio</button>
                 </div>
-                <h3 class="service-name">Procesamiento de Texto</h3>
-                <p class="service-description">Creación, edición y formateo profesional de documentos en Word.</p>
-                <ul class="service-features">
-                    <li>Formateo avanzado de documentos</li>
-                    <li>Creación de plantillas</li>
-                    <li>Conversión entre formatos</li>
-                    <li>Revisión ortográfica y gramatical</li>
-                    <li>Automatización con macros</li>
-                </ul>
-                <div class="service-price">Desde $25/h</div>
-                <button class="btn" onclick="openQuoteModal()">Solicitar Presupuesto</button>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-file-excel"></i>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <h3 class="service-name">Hojas de Cálculo</h3>
+                    <p class="service-description">Desarrollo de hojas de cálculo avanzadas en Excel.</p>
+                    <ul class="service-features">
+                        <li>Fórmulas avanzadas</li>
+                        <li>Tablas dinámicas</li>
+                        <li>Dashboards</li>
+                        <li>Análisis de datos</li>
+                    </ul>
+                    <div class="service-price">Desde $30/h</div>
+                    <button class="btn" onclick="selectService('Hojas de Cálculo', 30)" style="width: 100%;">Contratar Este Servicio</button>
                 </div>
-                <h3 class="service-name">Hojas de Cálculo</h3>
-                <p class="service-description">Desarrollo de hojas de cálculo avanzadas en Excel con fórmulas y automatizaciones.</p>
-                <ul class="service-features">
-                    <li>Fórmulas y funciones avanzadas</li>
-                    <li>Tablas dinámicas y gráficos</li>
-                    <li>Macros y automatización</li>
-                    <li>Dashboards interactivos</li>
-                    <li>Análisis de datos</li>
-                </ul>
-                <div class="service-price">Desde $30/h</div>
-                <button class="btn" onclick="openQuoteModal()">Solicitar Presupuesto</button>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-image"></i>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3 class="service-name">Edición de Imágenes</h3>
+                    <p class="service-description">Servicios profesionales de edición y retoque de imágenes.</p>
+                    <ul class="service-features">
+                        <li>Retoque de fotos</li>
+                        <li>Manipulación creativa</li>
+                        <li>Diseño de gráficos</li>
+                        <li>Preparación para web</li>
+                    </ul>
+                    <div class="service-price">Desde $35/h</div>
+                    <button class="btn" onclick="selectService('Edición de Imágenes', 35)" style="width: 100%;">Contratar Este Servicio</button>
                 </div>
-                <h3 class="service-name">Edición de Imágenes</h3>
-                <p class="service-description">Servicios profesionales de edición y retoque de imágenes.</p>
-                <ul class="service-features">
-                    <li>Retoque y mejora de fotos</li>
-                    <li>Manipulación creativa</li>
-                    <li>Diseño de gráficos</li>
-                    <li>Preparación para web e impresión</li>
-                    <li>Restauración de imágenes antiguas</li>
-                </ul>
-                <div class="service-price">Desde $35/h</div>
-                <button class="btn" onclick="openQuoteModal()">Solicitar Presupuesto</button>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="about-content">
-            <h2>Tu Socio Tecnológico de Confianza</h2>
-            <p>En TECNOMENTE combinamos expertise técnico con un servicio al cliente excepcional para ofrecer soluciones informáticas completas. Nuestro equipo está especializado en las herramientas más avanzadas del mercado.</p>
-            <p>Ya sea que necesites ayuda con documentos de oficina, análisis de datos complejos o edición de imágenes profesionales, tenemos la solución perfecta para tus necesidades tecnológicas.</p>
-            <button class="btn" onclick="openQuoteModal()">Solicitar Presupuesto</button>
-        </div>
-    </section>
+        <!-- Pricing Section -->
+        <section class="pricing" id="pricing">
+            <h2 class="section-title">Nuestros Precios</h2>
+            <div class="services-grid">
+                <div class="price-card">
+                    <h3>Básico</h3>
+                    <div class="price-amount">$25/h</div>
+                    <p>Ideal para proyectos simples y tareas puntuales</p>
+                    <ul class="service-features">
+                        <li>Hasta 2 revisiones</li>
+                        <li>Soporte por email</li>
+                        <li>Entrega en 3-5 días</li>
+                    </ul>
+                    <button class="btn" onclick="selectService('Plan Básico', 25)" style="width: 100%; margin-top: 1rem;">Elegir Plan</button>
+                </div>
+                <div class="price-card">
+                    <h3>Profesional</h3>
+                    <div class="price-amount">$40/h</div>
+                    <p>Perfecto para proyectos complejos y empresas</p>
+                    <ul class="service-features">
+                        <li>Revisiones ilimitadas</li>
+                        <li>Soporte prioritario</li>
+                        <li>Entrega en 1-3 días</li>
+                        <li>Asesoramiento personalizado</li>
+                    </ul>
+                    <button class="btn" onclick="selectService('Plan Profesional', 40)" style="width: 100%; margin-top: 1rem;">Elegir Plan</button>
+                </div>
+            </div>
+        </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <h2 class="section-title">Contacto</h2>
-        <form class="contact-form" id="contactForm">
-            <div class="form-group">
-                <label for="name">Nombre *</label>
-                <input type="text" id="name" class="form-control" required>
+        <!-- About Section -->
+        <section class="about" id="about">
+            <div class="about-content">
+                <h2>Nosotros</h2>
+                <p>En TECNOMENTE somos un equipo de profesionales apasionados por la tecnología y comprometidos con ofrecer soluciones informáticas de alta calidad.</p>
+                <p>Con más de 5 años de experiencia en el sector, hemos ayudado a cientos de clientes a resolver sus desafíos tecnológicos de manera eficiente y efectiva.</p>
+                <p>Nuestra misión es hacer que la tecnología trabaje para ti, simplificando procesos y optimizando resultados.</p>
+                <button class="btn" onclick="scrollToContact()">Trabajar con Nosotros</button>
             </div>
-            <div class="form-group">
-                <label for="lastname">Apellido *</label>
-                <input type="text" id="lastname" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Correo Electrónico *</label>
-                <input type="email" id="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Mensaje *</label>
-                <textarea id="message" class="form-control" required></textarea>
-            </div>
-            <button type="submit" class="btn" style="width: 100%;">Enviar Mensaje</button>
-        </form>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Servicios</h3>
-                <ul class="footer-links">
-                    <li><a href="#services">Procesamiento de Texto</a></li>
-                    <li><a href="#services">Hojas de Cálculo</a></li>
-                    <li><a href="#services">Edición de Imágenes</a></li>
-                    <li><a href="#services">Soporte Técnico</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Compañía</h3>
-                <ul class="footer-links">
-                    <li><a href="#about">Nosotros</a></li>
-                    <li><a href="#testimonials">Testimonios</a></li>
-                    <li><a href="#blog">Blog</a></li>
-                    <li><a href="#careers">Trabaja con Nosotros</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Soporte</h3>
-                <ul class="footer-links">
-                    <li><a href="#contact">Contacto</a></li>
-                    <li><a href="#faq">Preguntas Frecuentes</a></li>
-                    <li><a href="#terms">Términos de Servicio</a></li>
-                    <li><a href="#privacy">Política de Privacidad</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Conecta</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-                    <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 TECNOMENTE - Soluciones Informáticas. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Quote Modal -->
-    <div class="modal" id="quoteModal">
-        <div class="modal-content">
-            <button class="close-modal" onclick="closeQuoteModal()">&times;</button>
-            <h2 style="margin-bottom: 2rem; text-align: center;">Solicitar Presupuesto</h2>
-            <form id="quoteForm">
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <h2 class="section-title">Contáctenos</h2>
+            <form class="contact-form" id="contactForm">
                 <div class="form-group">
-                    <label for="quoteName">Nombre *</label>
-                    <input type="text" id="quoteName" class="form-control" required>
+                    <label for="name">Nombre *</label>
+                    <input type="text" id="name" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="quoteService">Servicio de Interés *</label>
-                    <select id="quoteService" class="form-control" required>
-                        <option value="">Selecciona un servicio</option>
-                        <option value="word">Procesamiento de Texto</option>
-                        <option value="excel">Hojas de Cálculo</option>
-                        <option value="images">Edición de Imágenes</option>
-                        <option value="other">Otro servicio</option>
-                    </select>
+                    <label for="lastname">Apellido *</label>
+                    <input type="text" id="lastname" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="quoteContact">Correo o Teléfono *</label>
-                    <input type="text" id="quoteContact" class="form-control" required placeholder="ejemplo@correo.com o +34 123 456 789">
+                    <label for="email">Correo Electrónico *</label>
+                    <input type="email" id="email" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label for="quoteDescription">Descripción de tu consulta *</label>
-                    <textarea id="quoteDescription" class="form-control" required placeholder="Describe brevemente lo que necesitas..."></textarea>
+                    <label for="message">Mensaje *</label>
+                    <textarea id="message" class="form-control" required placeholder="Describe cómo podemos ayudarte..."></textarea>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Enviar Solicitud</button>
+                <div class="form-group">
+                    <label>Subir Archivo del Proyecto (Opcional)</label>
+                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Haz clic para subir tu archivo</p>
+                        <input type="file" id="fileInput" style="display: none;" onchange="showFileName(this)">
+                    </div>
+                    <small id="fileName" style="color: var(--text-light); font-size: 0.8rem;"></small>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Enviar Mensaje</button>
             </form>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Servicios</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Procesamiento de Texto</a></li>
+                        <li><a href="#services">Hojas de Cálculo</a></li>
+                        <li><a href="#services">Edición de Imágenes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><a href="tel:+1234567890"><i class="fas fa-phone"></i> Llamar</a></li>
+                        <li><a href="mailto:info@teconmente.com"><i class="fas fa-envelope"></i> Email</a></li>
+                        <li><a href="https://wa.me/1234567890"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 TECNOMENTE - Soluciones Informáticas</p>
+            </div>
+        </footer>
+
+        <!-- Quick Action Buttons -->
+        <div class="quick-actions">
+            <button class="action-btn" onclick="openQuoteModal()" title="Solicitar Presupuesto">
+                <i class="fas fa-dollar-sign"></i>
+            </button>
+            <button class="action-btn" onclick="scrollToContact()" title="Contactar">
+                <i class="fas fa-envelope"></i>
+            </button>
+            <button class="action-btn" onclick="window.location.href='tel:+1234567890'" title="Llamar">
+                <i class="fas fa-phone"></i>
+            </button>
         </div>
-    </div>
 
-    <script>
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        <!-- Quote Modal -->
+        <div class="modal" id="quoteModal">
+            <div class="modal-content">
+                <button class="close-modal" onclick="closeQuoteModal()">&times;</button>
+                <h2 style="margin-bottom: 1.5rem; text-align: center;">Solicitar Presupuesto</h2>
+                <form id="quoteForm">
+                    <div class="form-group">
+                        <label for="quoteName">Nombre *</label>
+                        <input type="text" id="quoteName" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quoteService">Servicio de Interés *</label>
+                        <select id="quoteService" class="form-control" required>
+                            <option value="">Selecciona un servicio</option>
+                            <option value="word">Procesamiento de Texto</option>
+                            <option value="excel">Hojas de Cálculo</option>
+                            <option value="images">Edición de Imágenes</option>
+                            <option value="other">Otro servicio</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="quoteContact">Correo o Teléfono *</label>
+                        <input type="text" id="quoteContact" class="form-control" required placeholder="ejemplo@correo.com o +34 123 456 789">
+                    </div>
+                    <div class="form-group">
+                        <label for="quoteDescription">Descripción del Proyecto *</label>
+                        <textarea id="quoteDescription" class="form-control" required placeholder="Describe en detalle lo que necesitas..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Subir Archivo del Proyecto (Opcional)</label>
+                        <div class="file-upload" onclick="document.getElementById('quoteFileInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Subir archivo para presupuesto</p>
+                            <input type="file" id="quoteFileInput" style="display: none;" onchange="showQuoteFileName(this)">
+                        </div>
+                        <small id="quoteFileName" style="color: var(--text-light); font-size: 0.8rem;"></small>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Enviar Solicitud</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            // Mobile Menu Functions
+            function openMobileMenu() {
+                document.getElementById('mobileMenu').classList.add('active');
+                document.body.style.overflow = 'hidden';
             }
-        });
 
-        // Mobile menu functionality
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        const navActions = document.querySelector('.nav-actions');
-
-        mobileMenuBtn.addEventListener('click', function() {
-            const isVisible = navLinks.style.display === 'flex';
-            
-            if (isVisible) {
-                navLinks.style.display = 'none';
-                navActions.style.display = 'none';
-            } else {
-                navLinks.style.display = 'flex';
-                navActions.style.display = 'flex';
-                navLinks.style.flexDirection = 'column';
-                navLinks.style.position = 'absolute';
-                navLinks.style.top = '100%';
-                navLinks.style.left = '0';
-                navLinks.style.width = '100%';
-                navLinks.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
-                navLinks.style.padding = '2rem';
-                navLinks.style.gap = '1.5rem';
-                navLinks.style.boxShadow = '0 5px 15px rgba(0, 240, 255, 0.2)';
-                
-                navActions.style.position = 'absolute';
-                navActions.style.top = 'calc(100% + 200px)';
-                navActions.style.left = '0';
-                navActions.style.width = '100%';
-                navActions.style.justifyContent = 'center';
-                navActions.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
-                navActions.style.padding = '1rem';
-                navActions.style.boxShadow = '0 5px 15px rgba(0, 240, 255, 0.2)';
+            function closeMobileMenu() {
+                document.getElementById('mobileMenu').classList.remove('active');
+                document.body.style.overflow = 'auto';
             }
-        });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            // Scroll to contact function
+            function scrollToContact() {
+                document.getElementById('contact').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+
+            // Quote Modal functions
+            function openQuoteModal() {
+                document.getElementById('quoteModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeQuoteModal() {
+                document.getElementById('quoteModal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            // Select Service function
+            function selectService(serviceName, price) {
+                openQuoteModal();
+                document.getElementById('quoteService').value = serviceName.toLowerCase().includes('word') ? 'word' : 
+                                                               serviceName.toLowerCase().includes('excel') ? 'excel' : 
+                                                               serviceName.toLowerCase().includes('imagen') ? 'images' : 'other';
+                document.getElementById('quoteDescription').value = `Me interesa el servicio: ${serviceName} a $${price}/hora. Por favor contáctenme para más detalles.`;
+            }
+
+            // File upload functions
+            function showFileName(input) {
+                const fileName = document.getElementById('fileName');
+                if (input.files.length > 0) {
+                    fileName.textContent = `Archivo seleccionado: ${input.files[0].name}`;
+                } else {
+                    fileName.textContent = '';
+                }
+            }
+
+            function showQuoteFileName(input) {
+                const fileName = document.getElementById('quoteFileName');
+                if (input.files.length > 0) {
+                    fileName.textContent = `Archivo seleccionado: ${input.files[0].name}`;
+                } else {
+                    fileName.textContent = '';
+                }
+            }
+
+            // Form submissions
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
                 e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    if (window.innerWidth <= 768) {
-                        navLinks.style.display = 'none';
-                        navActions.style.display = 'none';
-                    }
+                alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
+                this.reset();
+                document.getElementById('fileName').textContent = '';
+            });
+
+            document.getElementById('quoteForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('¡Solicitud de presupuesto enviada! Nos pondremos en contacto contigo en breve.');
+                this.reset();
+                document.getElementById('quoteFileName').textContent = '';
+                closeQuoteModal();
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('quoteModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeQuoteModal();
                 }
             });
-        });
 
-        // Scroll to contact function
-        function scrollToContact() {
-            document.getElementById('contact').scrollIntoView({
-                behavior: 'smooth'
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
             });
-        }
 
-        // Quote Modal functions
-        function openQuoteModal() {
-            document.getElementById('quoteModal').classList.add('active');
-        }
-
-        function closeQuoteModal() {
-            document.getElementById('quoteModal').classList.remove('active');
-        }
-
-        // Form submissions
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
-            this.reset();
-        });
-
-        document.getElementById('quoteForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Solicitud enviada! Nos pondremos en contacto contigo en breve.');
-            this.reset();
-            closeQuoteModal();
-        });
-
-        // Close modal when clicking outside
-        document.getElementById('quoteModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeQuoteModal();
+            // Create animated connections
+            function createConnections() {
+                const nodes = document.querySelectorAll('.node');
+                const container = document.querySelector('.animated-bg');
+                
+                nodes.forEach((node, index) => {
+                    if (index < nodes.length - 1) {
+                        const nextNode = nodes[index + 1];
+                        const rect1 = node.getBoundingClientRect();
+                        const rect2 = nextNode.getBoundingClientRect();
+                        
+                        const x1 = rect1.left + rect1.width / 2;
+                        const y1 = rect1.top + rect1.height / 2;
+                        const x2 = rect2.left + rect2.width / 2;
+                        const y2 = rect2.top + rect2.height / 2;
+                        
+                        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+                        
+                        const connection = document.createElement('div');
+                        connection.className = 'connection';
+                        connection.style.width = length + 'px';
+                        connection.style.top = y1 + 'px';
+                        connection.style.left = x1 + 'px';
+                        connection.style.transform = `rotate(${angle}deg)`;
+                        connection.style.animationDelay = Math.random() * 4 + 's';
+                        
+                        container.appendChild(connection);
+                    }
+                });
             }
-        });
-    </script>
+
+            // Initialize when page loads
+            document.addEventListener('DOMContentLoaded', function() {
+                createConnections();
+            });
+        </script>
+    </div>
 </body>
 </html>
