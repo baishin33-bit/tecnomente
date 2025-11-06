@@ -3,1071 +3,837 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TECNOMENTE - Soluciones Informáticas</title>
+    <title>Delicias Celestiales - Tortas Materas y Pastafloras</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #000000;
-            --secondary: #ffffff;
-            --accent: #00f0ff;
-            --accent-dark: #008cff;
-            --text-light: #cccccc;
-            --card-bg: rgba(255, 255, 255, 0.1);
-            --transition: all 0.3s ease;
+            --primary: #8B4513;
+            --secondary: #D2B48C;
+            --accent: #FFD700;
+            --light: #FFF8DC;
+            --dark: #5D4037;
+            --text: #4E342E;
         }
-
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            color: var(--secondary);
+            background-color: var(--light);
+            color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
         }
-
-        /* Fondo Animado Tecnológico */
-        .animated-bg {
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
+            width: 100%;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(45deg, #000428, #004e92, #000428);
-            overflow: hidden;
-        }
-
-        .circuit {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(0, 240, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 140, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(0, 240, 255, 0.05) 0%, transparent 50%);
-            animation: pulse 8s ease-in-out infinite;
-        }
-
-        .node {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            box-shadow: 0 0 20px var(--accent);
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .node:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
-        .node:nth-child(2) { top: 80%; left: 15%; animation-delay: 1s; }
-        .node:nth-child(3) { top: 40%; left: 85%; animation-delay: 2s; }
-        .node:nth-child(4) { top: 60%; left: 90%; animation-delay: 3s; }
-        .node:nth-child(5) { top: 30%; left: 50%; animation-delay: 4s; }
-        .node:nth-child(6) { top: 70%; left: 60%; animation-delay: 5s; }
-
-        .connection {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            animation: connectionGlow 4s linear infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-20px) scale(1.2); }
-        }
-
-        @keyframes connectionGlow {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        /* Overlay para mejor legibilidad */
-        .content-overlay {
-            position: relative;
-            z-index: 1;
-            background: rgba(0, 0, 0, 0.7);
-            min-height: 100vh;
-        }
-
-        /* Header Mobile */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.95);
-            padding: 1rem 0;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 240, 255, 0.3);
         }
-
-        .nav {
+        
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 1rem;
+            padding: 15px 0;
         }
-
+        
         .logo {
-            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
             font-weight: 700;
-            background: linear-gradient(to right, var(--accent), var(--accent-dark));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
-
-        .mobile-menu-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--secondary);
-            padding: 0.5rem;
-            transition: var(--transition);
-        }
-
-        .mobile-menu-btn:hover {
+        
+        .logo span {
             color: var(--accent);
         }
-
-        .mobile-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 85%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(15px);
-            transition: var(--transition);
-            z-index: 2000;
-            padding: 2rem;
-            border-right: 2px solid var(--accent);
-            box-shadow: 5px 0 25px rgba(0, 240, 255, 0.2);
-        }
-
-        .mobile-menu.active {
-            left: 0;
-        }
-
-        .close-menu {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: var(--secondary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .close-menu:hover {
-            color: var(--accent);
-            transform: scale(1.1);
-        }
-
-        .mobile-nav-links {
+        
+        nav ul {
+            display: flex;
             list-style: none;
-            margin-top: 3rem;
         }
-
-        .mobile-nav-links li {
-            margin-bottom: 1.5rem;
+        
+        nav ul li {
+            margin-left: 25px;
         }
-
-        .mobile-nav-links a {
-            color: var(--secondary);
+        
+        nav ul li a {
             text-decoration: none;
-            font-size: 1.2rem;
-            display: block;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-            position: relative;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
         }
-
-        .mobile-nav-links a:hover {
-            color: var(--accent);
-            padding-left: 1rem;
+        
+        nav ul li a:hover {
+            color: var(--primary);
         }
-
-        .mobile-nav-links a::before {
-            content: '▸';
-            position: absolute;
-            left: -1rem;
-            opacity: 0;
-            transition: var(--transition);
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
-
-        .mobile-nav-links a:hover::before {
-            opacity: 1;
-            left: 0;
-        }
-
-        .mobile-actions {
-            position: absolute;
-            bottom: 2rem;
-            left: 2rem;
-            right: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .mobile-actions .btn {
-            text-align: center;
-            padding: 1rem;
-        }
-
-        /* Hero Section Mobile */
+        
+        /* Hero Section */
         .hero {
-            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1555507036-ab794f27d2e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 1rem;
-            position: relative;
+            color: white;
+            margin-top: 70px;
         }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
         }
-
+        
         .hero h2 {
-            font-size: 1.2rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-            color: var(--text-light);
-            text-transform: uppercase;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
-
+        
         .hero p {
-            font-size: 1rem;
-            margin-bottom: 2.5rem;
-            color: var(--text-light);
-            font-weight: 300;
-            line-height: 1.6;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
         }
-
+        
         .btn {
             display: inline-block;
-            padding: 1rem 2rem;
-            background: linear-gradient(to right, var(--accent), var(--accent-dark));
-            color: var(--primary);
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 50px;
             text-decoration: none;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            transition: var(--transition);
+            font-weight: 600;
+            transition: all 0.3s;
             border: none;
-            border-radius: 25px;
-            font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
         }
-
+        
         .btn:hover {
+            background-color: var(--primary);
+            color: white;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 240, 255, 0.5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--secondary);
-            border: 2px solid var(--accent);
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: white;
         }
-
-        /* Announcement Bar */
-        .announcement {
-            background: linear-gradient(to right, var(--accent), var(--accent-dark));
-            color: var(--primary);
-            text-align: center;
-            padding: 0.8rem;
-            font-size: 0.8rem;
-            font-weight: 600;
-            position: relative;
-            top: 60px;
-        }
-
-        /* Services Section Mobile */
-        .services {
-            padding: 4rem 1rem;
-        }
-
+        
         .section-title {
             text-align: center;
-            font-size: 1.8rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 3rem;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+            margin-bottom: 50px;
         }
-
-        .services-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
         }
-
-        .service-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
+        
+        .section-title p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text);
         }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.2);
-            border-color: var(--accent);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-            text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
-        }
-
-        .service-name {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .service-description {
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-        }
-
-        .service-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 1.5rem;
-        }
-
-        .service-features li {
-            padding: 0.4rem 0;
-            color: var(--text-light);
-            position: relative;
-            padding-left: 1.2rem;
-            font-size: 0.9rem;
-        }
-
-        .service-features li:before {
-            content: '▸';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        .service-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--accent);
-        }
-
-        /* About Section Mobile */
-        .about {
-            padding: 4rem 1rem;
-            background: rgba(0, 0, 0, 0.5);
-            text-align: center;
-            backdrop-filter: blur(5px);
-        }
-
+        
         .about-content {
-            max-width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 50px;
         }
-
-        .about h2 {
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
             font-size: 1.8rem;
-            font-weight: 300;
-            margin-bottom: 1.5rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+            margin-bottom: 20px;
+            color: var(--primary);
         }
-
-        .about p {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
-        /* Contact Section Mobile */
-        .contact {
-            padding: 4rem 1rem;
-        }
-
-        .contact-form {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .form-control {
+        
+        .about-image img {
             width: 100%;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: var(--secondary);
-            font-size: 1rem;
-            transition: var(--transition);
+            height: auto;
+            display: block;
         }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
+        
+        /* Products Section */
+        .products {
+            padding: 80px 0;
+            background-color: var(--light);
         }
-
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
         }
-
-        .file-upload {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
         }
-
-        .file-upload:hover {
-            border-color: var(--accent);
-            background: rgba(0, 240, 255, 0.1);
+        
+        .product-card:hover {
+            transform: translateY(-10px);
         }
-
-        .file-upload i {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
+        
+        .product-image {
+            height: 200px;
+            overflow: hidden;
         }
-
-        /* Modal Mobile */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        
+        .product-image img {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 3000;
-            padding: 1rem;
-            overflow-y: auto;
+            object-fit: cover;
+            transition: transform 0.5s;
         }
-
-        .modal.active {
-            display: block;
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
         }
-
-        .modal-content {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            margin-top: 2rem;
+        
+        .product-info {
+            padding: 20px;
         }
-
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: var(--transition);
+        
+        .product-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--primary);
         }
-
-        .close-modal:hover {
-            color: var(--accent);
+        
+        .product-info p {
+            margin-bottom: 15px;
+            color: var(--text);
         }
-
-        /* Quick Actions */
-        .quick-actions {
-            position: fixed;
-            bottom: 1rem;
-            right: 1rem;
-            z-index: 1000;
+        
+        .product-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
             display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
+            align-items: center;
         }
-
-        .action-btn {
+        
+        .author-image {
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(to right, var(--accent), var(--accent-dark));
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
             color: var(--primary);
-            border: none;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-detail i {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
-            transition: var(--transition);
+            margin-right: 15px;
         }
-
-        .action-btn:hover {
-            transform: scale(1.1);
+        
+        .contact-form {
+            flex: 1;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
-        /* Footer Mobile */
-        .footer {
-            background-color: rgba(0, 0, 0, 0.9);
-            color: var(--secondary);
-            padding: 3rem 1rem 2rem;
-            backdrop-filter: blur(10px);
+        
+        .form-group {
+            margin-bottom: 20px;
         }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
             font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
             color: var(--accent);
         }
-
-        .footer-links {
+        
+        .footer-col ul {
             list-style: none;
         }
-
-        .footer-links li {
-            margin-bottom: 0.5rem;
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
         }
-
-        .footer-links a {
-            color: var(--text-light);
+        
+        .footer-col ul li a {
+            color: #ddd;
             text-decoration: none;
-            transition: var(--transition);
-            font-size: 0.9rem;
+            transition: color 0.3s;
         }
-
-        .footer-links a:hover {
+        
+        .footer-col ul li a:hover {
             color: var(--accent);
         }
-
-        .footer-bottom {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--accent);
+            color: var(--dark);
+        }
+        
+        .copyright {
             text-align: center;
-            font-size: 0.8rem;
-            color: var(--text-light);
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
-
-        /* Secciones adicionales */
-        .products, .pricing {
-            padding: 4rem 1rem;
-            min-height: 50vh;
+        
+        /* Floating Buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
         }
-
-        .price-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
+        
+        .floating-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            transition: transform 0.3s;
         }
-
-        .price-amount {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin: 1rem 0;
+        
+        .floating-btn:hover {
+            transform: scale(1.1);
         }
-
+        
+        .whatsapp-btn {
+            background-color: #25D366;
+            color: white;
+        }
+        
+        .contact-btn {
+            background-color: var(--primary);
+            color: white;
+        }
+        
         /* Responsive */
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2rem;
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
             }
             
             .hero h2 {
-                font-size: 1rem;
+                font-size: 2.2rem;
             }
             
-            .btn {
-                padding: 0.9rem 1.5rem;
-                font-size: 0.8rem;
+            .about-content {
+                flex-direction: column;
             }
             
-            .service-card {
-                padding: 1.5rem;
+            .contact-container {
+                flex-direction: column;
             }
             
-            .modal-content {
-                padding: 1.5rem;
+            .mobile-menu {
+                display: block;
             }
-        }
-
-        /* Prevenir scroll horizontal */
-        html, body {
-            max-width: 100%;
-            overflow-x: hidden;
+            
+            nav {
+                display: none;
+                width: 100%;
+                margin-top: 15px;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Fondo Animado -->
-    <div class="animated-bg">
-        <div class="circuit"></div>
-        <div class="node"></div>
-        <div class="node"></div>
-        <div class="node"></div>
-        <div class="node"></div>
-        <div class="node"></div>
-        <div class="node"></div>
-    </div>
-
-    <div class="content-overlay">
-        <!-- Announcement Bar -->
-        <div class="announcement">
-            SOLUCIONES INFORMÁTICAS PROFESIONALES
-        </div>
-
-        <!-- Header Mobile -->
-        <header class="header">
-            <nav class="nav">
-                <div class="logo">TECNOMENTE</div>
-                <button class="mobile-menu-btn" onclick="openMobileMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <h1>Delicias <span>Celestiales</span></h1>
+            </div>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
             </nav>
-        </header>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
-            <button class="close-menu" onclick="closeMobileMenu()">
-                <i class="fas fa-times"></i>
-            </button>
-            <ul class="mobile-nav-links">
-                <li><a href="#services" onclick="closeMobileMenu()">Productos</a></li>
-                <li><a href="#pricing" onclick="closeMobileMenu()">Precios</a></li>
-                <li><a href="#about" onclick="closeMobileMenu()">Nosotros</a></li>
-                <li><a href="#contact" onclick="closeMobileMenu()">Contáctenos</a></li>
-            </ul>
-            <div class="mobile-actions">
-                <button class="btn" onclick="openQuoteModal(); closeMobileMenu();">Solicitar Presupuesto</button>
-                <button class="btn btn-outline" onclick="scrollToContact(); closeMobileMenu();">Contactar Ahora</button>
-            </div>
         </div>
+    </header>
 
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>TECNOMENTE</h1>
-            <h2>SOLUCIONES INFORMÁTICAS</h2>
-            <p>Expertos en tecnología listos para resolver todos tus problemas informáticos de forma rápida y profesional</p>
-            <div style="display: flex; flex-direction: column; gap: 1rem; width: 100%; max-width: 300px;">
-                <a href="#services" class="btn">Ver Servicios</a>
-                <button class="btn btn-outline" onclick="openQuoteModal()">Solicitar Presupuesto</button>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container hero-content">
+            <h2>Dulces Momentos, Sabores Celestiales</h2>
+            <p>Descubre nuestras exquisitas tortas materas, pastafloras y delicias dulces artesanales, elaboradas con los mejores ingredientes y mucho amor.</p>
+            <a href="#productos" class="btn">Ver Productos</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestra Historia</h2>
+                <p>Con más de 10 años de experiencia, convertimos momentos especiales en recuerdos dulces e inolvidables.</p>
             </div>
-        </section>
-
-        <!-- Products Section -->
-        <section class="products" id="services">
-            <h2 class="section-title">Nuestros Productos</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-file-word"></i>
-                    </div>
-                    <h3 class="service-name">Procesamiento de Texto</h3>
-                    <p class="service-description">Creación, edición y formateo profesional de documentos en Word.</p>
-                    <ul class="service-features">
-                        <li>Formateo avanzado</li>
-                        <li>Creación de plantillas</li>
-                        <li>Conversión de formatos</li>
-                        <li>Revisión ortográfica</li>
-                    </ul>
-                    <div class="service-price">Desde $25/h</div>
-                    <button class="btn" onclick="selectService('Procesamiento de Texto', 25)" style="width: 100%;">Contratar Este Servicio</button>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-file-excel"></i>
-                    </div>
-                    <h3 class="service-name">Hojas de Cálculo</h3>
-                    <p class="service-description">Desarrollo de hojas de cálculo avanzadas en Excel.</p>
-                    <ul class="service-features">
-                        <li>Fórmulas avanzadas</li>
-                        <li>Tablas dinámicas</li>
-                        <li>Dashboards</li>
-                        <li>Análisis de datos</li>
-                    </ul>
-                    <div class="service-price">Desde $30/h</div>
-                    <button class="btn" onclick="selectService('Hojas de Cálculo', 30)" style="width: 100%;">Contratar Este Servicio</button>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <h3 class="service-name">Edición de Imágenes</h3>
-                    <p class="service-description">Servicios profesionales de edición y retoque de imágenes.</p>
-                    <ul class="service-features">
-                        <li>Retoque de fotos</li>
-                        <li>Manipulación creativa</li>
-                        <li>Diseño de gráficos</li>
-                        <li>Preparación para web</li>
-                    </ul>
-                    <div class="service-price">Desde $35/h</div>
-                    <button class="btn" onclick="selectService('Edición de Imágenes', 35)" style="width: 100%;">Contratar Este Servicio</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Pricing Section -->
-        <section class="pricing" id="pricing">
-            <h2 class="section-title">Nuestros Precios</h2>
-            <div class="services-grid">
-                <div class="price-card">
-                    <h3>Básico</h3>
-                    <div class="price-amount">$25/h</div>
-                    <p>Ideal para proyectos simples y tareas puntuales</p>
-                    <ul class="service-features">
-                        <li>Hasta 2 revisiones</li>
-                        <li>Soporte por email</li>
-                        <li>Entrega en 3-5 días</li>
-                    </ul>
-                    <button class="btn" onclick="selectService('Plan Básico', 25)" style="width: 100%; margin-top: 1rem;">Elegir Plan</button>
-                </div>
-                <div class="price-card">
-                    <h3>Profesional</h3>
-                    <div class="price-amount">$40/h</div>
-                    <p>Perfecto para proyectos complejos y empresas</p>
-                    <ul class="service-features">
-                        <li>Revisiones ilimitadas</li>
-                        <li>Soporte prioritario</li>
-                        <li>Entrega en 1-3 días</li>
-                        <li>Asesoramiento personalizado</li>
-                    </ul>
-                    <button class="btn" onclick="selectService('Plan Profesional', 40)" style="width: 100%; margin-top: 1rem;">Elegir Plan</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="about" id="about">
             <div class="about-content">
-                <h2>Nosotros</h2>
-                <p>En TECNOMENTE somos un equipo de profesionales apasionados por la tecnología y comprometidos con ofrecer soluciones informáticas de alta calidad.</p>
-                <p>Con más de 5 años de experiencia en el sector, hemos ayudado a cientos de clientes a resolver sus desafíos tecnológicos de manera eficiente y efectiva.</p>
-                <p>Nuestra misión es hacer que la tecnología trabaje para ti, simplificando procesos y optimizando resultados.</p>
-                <button class="btn" onclick="scrollToContact()">Trabajar con Nosotros</button>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section class="contact" id="contact">
-            <h2 class="section-title">Contáctenos</h2>
-            <form class="contact-form" id="contactForm">
-                <div class="form-group">
-                    <label for="name">Nombre *</label>
-                    <input type="text" id="name" class="form-control" required>
+                <div class="about-text">
+                    <h3>Pasión por la Repostería</h3>
+                    <p>En Delicias Celestiales nos apasiona crear experiencias dulces que deleiten tus sentidos. Cada torta matera, cada pastaflora, cada postre que elaboramos está hecho con ingredientes de primera calidad y técnicas artesanales que hemos perfeccionado a lo largo de los años.</p>
+                    <p>Nuestro compromiso es ofrecer productos frescos, deliciosos y visualmente atractivos para que tus celebraciones sean realmente especiales. Desde bodas y cumpleaños hasta reuniones familiares, estamos aquí para endulzar tus momentos más importantes.</p>
+                    <a href="#contacto" class="btn">Hacer Pedido</a>
                 </div>
-                <div class="form-group">
-                    <label for="lastname">Apellido *</label>
-                    <input type="text" id="lastname" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Correo Electrónico *</label>
-                    <input type="email" id="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Mensaje *</label>
-                    <textarea id="message" class="form-control" required placeholder="Describe cómo podemos ayudarte..."></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Subir Archivo del Proyecto (Opcional)</label>
-                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>Haz clic para subir tu archivo</p>
-                        <input type="file" id="fileInput" style="display: none;" onchange="showFileName(this)">
-                    </div>
-                    <small id="fileName" style="color: var(--text-light); font-size: 0.8rem;"></small>
-                </div>
-                <button type="submit" class="btn" style="width: 100%;">Enviar Mensaje</button>
-            </form>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Servicios</h3>
-                    <ul class="footer-links">
-                        <li><a href="#services">Procesamiento de Texto</a></li>
-                        <li><a href="#services">Hojas de Cálculo</a></li>
-                        <li><a href="#services">Edición de Imágenes</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contacto</h3>
-                    <ul class="footer-links">
-                        <li><a href="tel:+1234567890"><i class="fas fa-phone"></i> Llamar</a></li>
-                        <li><a href="mailto:info@teconmente.com"><i class="fas fa-envelope"></i> Email</a></li>
-                        <li><a href="https://wa.me/1234567890"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-                    </ul>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=668&q=80" alt="Nuestra pastelería">
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 TECNOMENTE - Soluciones Informáticas</p>
-            </div>
-        </footer>
-
-        <!-- Quick Action Buttons -->
-        <div class="quick-actions">
-            <button class="action-btn" onclick="openQuoteModal()" title="Solicitar Presupuesto">
-                <i class="fas fa-dollar-sign"></i>
-            </button>
-            <button class="action-btn" onclick="scrollToContact()" title="Contactar">
-                <i class="fas fa-envelope"></i>
-            </button>
-            <button class="action-btn" onclick="window.location.href='tel:+1234567890'" title="Llamar">
-                <i class="fas fa-phone"></i>
-            </button>
         </div>
+    </section>
 
-        <!-- Quote Modal -->
-        <div class="modal" id="quoteModal">
-            <div class="modal-content">
-                <button class="close-modal" onclick="closeQuoteModal()">&times;</button>
-                <h2 style="margin-bottom: 1.5rem; text-align: center;">Solicitar Presupuesto</h2>
-                <form id="quoteForm">
-                    <div class="form-group">
-                        <label for="quoteName">Nombre *</label>
-                        <input type="text" id="quoteName" class="form-control" required>
+    <!-- Products Section -->
+    <section class="products" id="productos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nuestros Productos</h2>
+                <p>Descubre nuestra amplia variedad de delicias dulces, elaboradas con los mejores ingredientes.</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-4.0.3&auto=format&fit=crop&w=668&q=80" alt="Torta Matera">
                     </div>
-                    <div class="form-group">
-                        <label for="quoteService">Servicio de Interés *</label>
-                        <select id="quoteService" class="form-control" required>
-                            <option value="">Selecciona un servicio</option>
-                            <option value="word">Procesamiento de Texto</option>
-                            <option value="excel">Hojas de Cálculo</option>
-                            <option value="images">Edición de Imágenes</option>
-                            <option value="other">Otro servicio</option>
-                        </select>
+                    <div class="product-info">
+                        <h3>Torta Matera Clásica</h3>
+                        <p>Nuestra torta matera tradicional, con capas de bizcocho esponjoso, dulce de leche y coco rallado.</p>
+                        <p class="product-price">$2.500</p>
+                        <a href="#" class="btn">Pedir Ahora</a>
                     </div>
-                    <div class="form-group">
-                        <label for="quoteContact">Correo o Teléfono *</label>
-                        <input type="text" id="quoteContact" class="form-control" required placeholder="ejemplo@correo.com o +34 123 456 789">
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?ixlib=rb-4.0.3&auto=format&fit=crop&w=668&q=80" alt="Pastaflora">
                     </div>
-                    <div class="form-group">
-                        <label for="quoteDescription">Descripción del Proyecto *</label>
-                        <textarea id="quoteDescription" class="form-control" required placeholder="Describe en detalle lo que necesitas..."></textarea>
+                    <div class="product-info">
+                        <h3>Pastaflora de Membrillo</h3>
+                        <p>Exquisita pastaflora con masa quebrada y relleno de dulce de membrillo casero.</p>
+                        <p class="product-price">$1.800</p>
+                        <a href="#" class="btn">Pedir Ahora</a>
                     </div>
-                    <div class="form-group">
-                        <label>Subir Archivo del Proyecto (Opcional)</label>
-                        <div class="file-upload" onclick="document.getElementById('quoteFileInput').click()">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Subir archivo para presupuesto</p>
-                            <input type="file" id="quoteFileInput" style="display: none;" onchange="showQuoteFileName(this)">
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1559620192-032c4bc4674e?ixlib=rb-4.0.3&auto=format&fit=crop&w=668&q=80" alt="Torta Personalizada">
+                    </div>
+                    <div class="product-info">
+                        <h3>Tortas Personalizadas</h3>
+                        <p>Creamos la torta de tus sueños para tu evento especial. Consulta por diseños y sabores.</p>
+                        <p class="product-price">Desde $3.500</p>
+                        <a href="#" class="btn">Consultar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <div class="section-title">
+                <h2>Lo Que Dicen Nuestros Clientes</h2>
+                <p>La satisfacción de nuestros clientes es nuestra mayor recompensa.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>"La torta matera de Delicias Celestiales fue el éxito de mi cumpleaños. Todos preguntaron dónde la había comprado. Definitivamente volveré a pedir."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Cliente">
                         </div>
-                        <small id="quoteFileName" style="color: var(--text-light); font-size: 0.8rem;"></small>
+                        <div class="author-info">
+                            <h4>María González</h4>
+                            <p>Cliente desde 2020</p>
+                        </div>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">Enviar Solicitud</button>
-                </form>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>"Encargué una torta personalizada para el bautismo de mi hija y quedé maravillada. No solo era hermosa, sino que estaba deliciosa. Superó todas mis expectativas."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Cliente">
+                        </div>
+                        <div class="author-info">
+                            <h4>Laura Martínez</h4>
+                            <p>Cliente desde 2021</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        <p>"Siempre compro las pastafloras para las reuniones familiares. Son adictivas. La masa es perfecta y el dulce de membrillo tiene un sabor increíble."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Cliente">
+                        </div>
+                        <div class="author-info">
+                            <h4>Carlos Rodríguez</h4>
+                            <p>Cliente habitual</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </section>
 
-        <script>
-            // Mobile Menu Functions
-            function openMobileMenu() {
-                document.getElementById('mobileMenu').classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contáctanos</h2>
+                <p>Estamos aquí para endulzar tus momentos especiales. ¡Contáctanos para hacer tu pedido!</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Dirección</h4>
+                                <p>Av. Siempre Viva 742, Local 5</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Teléfono</h4>
+                                <p>+54 11 1234-5678</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@deliciascelestiales.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Horarios</h4>
+                                <p>Lunes a Sábado: 9:00 - 20:00</p>
+                                <p>Domingos: 10:00 - 14:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Envíanos un Mensaje</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            function closeMobileMenu() {
-                document.getElementById('mobileMenu').classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>Delicias Celestiales</h4>
+                    <p>Endulzando tus momentos especiales desde 2013. Tortas materas, pastafloras y delicias dulces artesanales.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#nosotros">Nosotros</a></li>
+                        <li><a href="#productos">Productos</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="#">Tortas Materas</a></li>
+                        <li><a href="#">Pastafloras</a></li>
+                        <li><a href="#">Tortas Personalizadas</a></li>
+                        <li><a href="#">Postres Individuales</a></li>
+                        <li><a href="#">Especiales para Eventos</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Síguenos</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Delicias Celestiales. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
 
-            // Scroll to contact function
-            function scrollToContact() {
-                document.getElementById('contact').scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-
-            // Quote Modal functions
-            function openQuoteModal() {
-                document.getElementById('quoteModal').classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeQuoteModal() {
-                document.getElementById('quoteModal').classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
-
-            // Select Service function
-            function selectService(serviceName, price) {
-                openQuoteModal();
-                document.getElementById('quoteService').value = serviceName.toLowerCase().includes('word') ? 'word' : 
-                                                               serviceName.toLowerCase().includes('excel') ? 'excel' : 
-                                                               serviceName.toLowerCase().includes('imagen') ? 'images' : 'other';
-                document.getElementById('quoteDescription').value = `Me interesa el servicio: ${serviceName} a $${price}/hora. Por favor contáctenme para más detalles.`;
-            }
-
-            // File upload functions
-            function showFileName(input) {
-                const fileName = document.getElementById('fileName');
-                if (input.files.length > 0) {
-                    fileName.textContent = `Archivo seleccionado: ${input.files[0].name}`;
-                } else {
-                    fileName.textContent = '';
-                }
-            }
-
-            function showQuoteFileName(input) {
-                const fileName = document.getElementById('quoteFileName');
-                if (input.files.length > 0) {
-                    fileName.textContent = `Archivo seleccionado: ${input.files[0].name}`;
-                } else {
-                    fileName.textContent = '';
-                }
-            }
-
-            // Form submissions
-            document.getElementById('contactForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('¡Gracias por tu mensaje! Te contactaremos pronto.');
-                this.reset();
-                document.getElementById('fileName').textContent = '';
-            });
-
-            document.getElementById('quoteForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('¡Solicitud de presupuesto enviada! Nos pondremos en contacto contigo en breve.');
-                this.reset();
-                document.getElementById('quoteFileName').textContent = '';
-                closeQuoteModal();
-            });
-
-            // Close modal when clicking outside
-            document.getElementById('quoteModal').addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeQuoteModal();
-                }
-            });
-
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-
-            // Create animated connections
-            function createConnections() {
-                const nodes = document.querySelectorAll('.node');
-                const container = document.querySelector('.animated-bg');
-                
-                nodes.forEach((node, index) => {
-                    if (index < nodes.length - 1) {
-                        const nextNode = nodes[index + 1];
-                        const rect1 = node.getBoundingClientRect();
-                        const rect2 = nextNode.getBoundingClientRect();
-                        
-                        const x1 = rect1.left + rect1.width / 2;
-                        const y1 = rect1.top + rect1.height / 2;
-                        const x2 = rect2.left + rect2.width / 2;
-                        const y2 = rect2.top + rect2.height / 2;
-                        
-                        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
-                        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-                        
-                        const connection = document.createElement('div');
-                        connection.className = 'connection';
-                        connection.style.width = length + 'px';
-                        connection.style.top = y1 + 'px';
-                        connection.style.left = x1 + 'px';
-                        connection.style.transform = `rotate(${angle}deg)`;
-                        connection.style.animationDelay = Math.random() * 4 + 's';
-                        
-                        container.appendChild(connection);
-                    }
-                });
-            }
-
-            // Initialize when page loads
-            document.addEventListener('DOMContentLoaded', function() {
-                createConnections();
-            });
-        </script>
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/541112345678?text=Hola,%20me%20interesan%20sus%20productos" class="floating-btn whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="#contacto" class="floating-btn contact-btn">
+            <i class="fas fa-envelope"></i>
+        </a>
     </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('nav').classList.toggle('active');
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('nav').classList.remove('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
